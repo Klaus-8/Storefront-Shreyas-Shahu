@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Query } from "@apollo/client/react/components";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import _ from "lodash";
 
 import { GET_CATEGORIES } from "../../Queries/queries";
 import { MiniCart, CurrencyMenu, OutsideClick } from "../../components";
@@ -44,7 +43,6 @@ export class Navbar extends Component {
 
   render() {
     const { cartProducts } = this.props;
-    const uniqueProducts = _.uniqWith(cartProducts, _.isEqual);
 
     return (
       <sc.Container>
@@ -109,9 +107,9 @@ export class Navbar extends Component {
               alt="Cart Icon"
               onClick={this.miniCartClickHandler}
             />
-            {uniqueProducts.length > 0 && (
+            {cartProducts?.length > 0 && (
               <sc.CartButtonBadgeContainer onClick={this.miniCartClickHandler}>
-                <sc.CartButtonBadge>{uniqueProducts.length}</sc.CartButtonBadge>
+                <sc.CartButtonBadge>{cartProducts.length}</sc.CartButtonBadge>
               </sc.CartButtonBadgeContainer>
             )}
           </sc.CartButtonContainer>

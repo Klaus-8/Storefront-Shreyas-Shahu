@@ -31,7 +31,7 @@ export const Container = styled.div`
   flex: 1;
 
   position: relative;
-  margin: 1rem 0;
+  margin: 1rem;
   padding: 1rem;
   height: 28rem;
   min-width: 24rem;
@@ -45,7 +45,8 @@ export const Container = styled.div`
     opacity: 1;
   }
 
-  @media screen and (min-width: 481px) and (max-width: 768px) {
+  @media screen and (min-width: 481px) and (max-width: 1024px) {
+    margin: 1rem 0;
     min-width: 22.5rem;
     max-width: 22.5rem;
   }
@@ -61,7 +62,7 @@ export const ImageContainer = styled.div`
 export const Image = styled.img`
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 `;
 
 export const NoStockContainer = styled.div`

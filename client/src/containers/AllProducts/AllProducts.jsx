@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { GET_PRODUCTS } from "../../Queries/queries";
 import { ProductCard, Loading } from "../../components";
 import * as sc from "./AllProducts.styles";
+import { useParams } from "react-router-dom";
 
 export class AllProducts extends Component {
   constructor(props) {
@@ -13,10 +14,10 @@ export class AllProducts extends Component {
   }
 
   render() {
-    const { category, isMiniCartOpen } = this.props;
+    const { category } = this.props.params;
 
     return (
-      <sc.OuterContainer miniCart={isMiniCartOpen}>
+      <sc.OuterContainer>
         <sc.Container>
           <sc.Heading>{`Category - ${
             category.charAt(0).toUpperCase() + category.slice(1).toLowerCase()
@@ -47,4 +48,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(AllProducts);
+export default connect(mapStateToProps)((props) => (
+  <AllProducts {...props} params={useParams()} />
+));

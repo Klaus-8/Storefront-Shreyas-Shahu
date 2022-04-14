@@ -27,11 +27,10 @@ export class ProductAttributes extends Component {
       <sc.AttributesContainer type={type}>
         {attributes.map((attribute, index) => (
           <sc.Attributes key={index} type={type}>
-            {type === "singleProduct" && (
-              <sc.AttributeName
-                type={type}
-              >{`${attribute.name} :`}</sc.AttributeName>
-            )}
+            <sc.AttributeName
+              className={type === "singleProduct" && "miniCartAttributeNames"}
+              type={type}
+            >{`${attribute.name} :`}</sc.AttributeName>
             {attribute.type === "swatch" ? (
               <sc.AttributeOuterContainer type={type}>
                 {attribute.items.map((item, index) => (

@@ -15,16 +15,13 @@ export class Cart extends Component {
   }
 
   render() {
-    const { cartProducts, isMiniCartOpen } = this.props;
+    const { cartProducts } = this.props;
 
     const uniqueProducts = _.uniqWith(cartProducts, _.isEqual);
     const uniqueIds = uniqueProducts.map((product) => product.id);
 
     return (
-      <sc.OuterContainer
-        emptyCart={cartProducts.length === 0 ? true : false}
-        miniCart={isMiniCartOpen}
-      >
+      <sc.OuterContainer emptyCart={cartProducts.length === 0 ? true : false}>
         <sc.Heading>CART</sc.Heading>
         {cartProducts.length !== 0 ? (
           <sc.Container>
@@ -49,7 +46,7 @@ export class Cart extends Component {
             ))}
           </sc.Container>
         ) : (
-          <sc.EmptyCartContainer miniCart={isMiniCartOpen}>
+          <sc.EmptyCartContainer>
             <sc.EmptyCart src={images.EmptyCart} alt="Empty Cart" />
           </sc.EmptyCartContainer>
         )}

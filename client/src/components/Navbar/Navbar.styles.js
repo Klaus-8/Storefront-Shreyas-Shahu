@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const Container = styled.div`
   display: flex;
@@ -21,6 +21,17 @@ export const Left = styled.div`
   align-items: center;
 `;
 
+const activeCategoryStyles = css`
+  color: var(--green-color);
+  padding-bottom: 1.625rem;
+  border-bottom: 2px solid var(--green-color);
+
+  @media screen and (max-width: 480px) {
+    padding-bottom: 13px;
+    border-bottom: 1px solid var(--green-color);
+  }
+`;
+
 export const Button = styled.div`
   height: 100%;
   margin-right: 1.5rem;
@@ -33,17 +44,7 @@ export const Button = styled.div`
   }
 
   ${({ active, currentCategory }) =>
-    active === currentCategory &&
-    `
-    color: var(--green-color);
-    padding-bottom: 26px;
-    border-bottom: 2px solid var(--green-color);
-
-    @media screen and (max-width: 480px) {
-      padding-bottom: 13px;
-      border-bottom: 1px solid var(--green-color);
-    }
-  `}
+    active === currentCategory && activeCategoryStyles}
 
   @media screen and (max-width: 480px) {
     margin-right: 0.3rem;

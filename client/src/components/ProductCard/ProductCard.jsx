@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 
 import images from "../../Assets/images";
 import * as sc from "./ProductCard.styles";
+import allActions from "../../State/Actions";
 
 export class ProductCard extends Component {
   constructor(props) {
@@ -12,8 +13,19 @@ export class ProductCard extends Component {
   }
 
   render() {
-    const { id, name, gallery, prices, inStock } = this.props.product;
+    const { id, name, gallery, prices, inStock, attributes } =
+      this.props.product;
     const { activeCurrency } = this.props;
+
+    let initialAttributes = {};
+    attributes.forEach((attribute) => {
+      const { name, items } = attribute;
+      initialAttributes = {
+        ...initialAttributes,
+        [name]: items[0].value,
+      };
+    });
+
     const price = prices.filter(
       (price) => price.currency.label === activeCurrency
     );
@@ -29,12 +41,16 @@ export class ProductCard extends Component {
               </sc.NoStockContainer>
             )}
           </sc.ImageContainer>
-          {inStock && (
-            <sc.ButtonContainer>
-              <sc.CartIcon src={images.WhiteCart} alt="Cart Icon" />
-            </sc.ButtonContainer>
-          )}
         </Link>
+        {inStock && (
+          <sc.ButtonContainer
+            onClick={() =>
+              this.props.addToCart(id, attributes, initialAttributes, prices)
+            }
+          >
+            <sc.CartIcon src={images.WhiteCart} alt="Cart Icon" />
+          </sc.ButtonContainer>
+        )}
         <sc.InfoContainer>
           <sc.Title>{name}</sc.Title>
           <sc.Price>{`${price[0].currency.symbol} ${price[0].amount}`}</sc.Price>
@@ -52,4 +68,18 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(ProductCard);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addToCart: (productId, attributes, selectedAttributes, prices) =>
+      dispatch(
+        allActions.productActions.AddToCart(
+          productId,
+          attributes,
+          selectedAttributes,
+          prices
+        )
+      ),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductCard);

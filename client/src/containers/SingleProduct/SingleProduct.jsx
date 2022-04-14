@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Query } from "@apollo/client/react/components";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
+import { Markup } from "interweave";
 
 import { GET_PRODUCT } from "../../Queries/queries";
 import allActions from "../../State/Actions";
@@ -13,7 +14,6 @@ export class SingleProduct extends Component {
     super(props);
     this.state = {
       primaryImage: 0,
-      showFullDesc: false,
     };
   }
 
@@ -21,18 +21,12 @@ export class SingleProduct extends Component {
     this.setState({ primaryImage: idx });
   };
 
-  fullDescHandler = () => {
-    this.setState({
-      showFullDesc: !this.state.showFullDesc,
-    });
-  };
-
   render() {
     const { productId } = this.props.params;
-    const { isMiniCartOpen, activeCurrency, selectedAttributes } = this.props;
+    const { activeCurrency, selectedAttributes } = this.props;
 
     return (
-      <sc.OuterContainer miniCart={isMiniCartOpen}>
+      <sc.OuterContainer>
         <Query query={GET_PRODUCT} variables={{ productId }}>
           {({ data, loading, error }) => {
             if (loading) return <Loading />;
@@ -109,32 +103,9 @@ export class SingleProduct extends Component {
                     </sc.OutOfStockContainer>
                   )}
                   <sc.Desc>
-                    {!this.state.showFullDesc ? (
-                      <sc.ShortDesc>
-                        {description.length < 200 ? (
-                          <div
-                            dangerouslySetInnerHTML={{ __html: description }}
-                          />
-                        ) : (
-                          <div
-                            dangerouslySetInnerHTML={{
-                              __html: description.slice(0, 200),
-                            }}
-                          />
-                        )}
-                        {description.length >= 200 && (
-                          <sc.ReadMore onClick={this.fullDescHandler}>
-                            ...Read More
-                          </sc.ReadMore>
-                        )}
-                      </sc.ShortDesc>
-                    ) : (
-                      <sc.FullDesc>
-                        <div
-                          dangerouslySetInnerHTML={{ __html: description }}
-                        />
-                      </sc.FullDesc>
-                    )}
+                    <sc.FullDesc>
+                      <Markup content={description} />
+                    </sc.FullDesc>
                   </sc.Desc>
                 </sc.InfoContainer>
               </sc.Container>

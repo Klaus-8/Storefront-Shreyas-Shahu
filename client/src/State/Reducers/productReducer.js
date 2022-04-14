@@ -2,7 +2,7 @@ import _ from "lodash";
 
 const reducer = (
   state = {
-    cartProducts: [],
+    cartProducts: JSON.parse(localStorage.getItem("cartProducts")) || [],
     isMiniCartOpen: false,
     activeCurrency: "USD",
     selectedAttributes: null,
@@ -11,10 +11,17 @@ const reducer = (
 ) => {
   switch (action.type) {
     case "ADD_TO_CART":
-      return {
+      const addProduct = {
         ...state,
         cartProducts: [...state.cartProducts, action.payload],
       };
+
+      localStorage.setItem(
+        "cartProducts",
+        JSON.stringify(addProduct.cartProducts)
+      );
+
+      return addProduct;
 
     case "REMOVE_FROM_CART":
       state.cartProducts.reverse();
@@ -24,10 +31,17 @@ const reducer = (
       );
       state.cartProducts.splice(idx, 1);
 
-      return {
+      const removeProduct = {
         ...state,
         cartProducts: [...state.cartProducts.reverse()],
       };
+
+      localStorage.setItem(
+        "cartProducts",
+        JSON.stringify(removeProduct.cartProducts)
+      );
+
+      return removeProduct;
 
     case "MINI_CART_TOGGLE":
       return {
@@ -45,6 +59,12 @@ const reducer = (
       return {
         ...state,
         selectedAttributes: action.payload,
+      };
+
+    case "CHECK_OUT":
+      return {
+        ...state,
+        cartProducts: action.payload,
       };
 
     default:

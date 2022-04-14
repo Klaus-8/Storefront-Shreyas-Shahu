@@ -4,8 +4,6 @@ export const OuterContainer = styled.div`
   padding: 5rem 6.25rem;
   transition: all 0.2s ease;
 
-  ${({ miniCart }) => miniCart && `background: rgba(57, 55, 72, 0.22);`};
-
   @media screen and (max-width: 480px) {
     padding: 1rem;
     display: flex;
@@ -45,7 +43,7 @@ export const Heading = styled.h2`
 
 export const ProductContainer = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   flex-wrap: wrap;
 
   margin: 6.5rem 0;
@@ -57,7 +55,8 @@ export const ProductContainer = styled.div`
     margin: 0;
   }
 
-  @media screen and (min-width: 481px) and (max-width: 768px) {
+  @media screen and (min-width: 481px) and (max-width: 1024px) {
+    justify-content: space-between;
     margin: 3rem 0;
   }
 `;

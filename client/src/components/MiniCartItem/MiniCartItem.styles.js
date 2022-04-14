@@ -56,7 +56,7 @@ export const RightContainer = styled.div`
 export const QuantityContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 
   margin-right: 0.625rem;
@@ -83,7 +83,9 @@ export const Plus = styled.div`
   }
 `;
 
-export const Quantity = styled.span``;
+export const Quantity = styled.span`
+  margin: 1.5rem 0;
+`;
 
 export const Minus = styled.div`
   width: 1.8rem;
@@ -109,5 +111,5 @@ export const ImageContainer = styled.div`
 export const Image = styled.img`
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 `;

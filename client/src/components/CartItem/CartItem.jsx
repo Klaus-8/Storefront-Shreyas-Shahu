@@ -87,19 +87,23 @@ export class CartItem extends Component {
             </sc.Minus>
           </sc.QuantityContainer>
           <sc.ImageContainer>
-            <sc.Arrow
-              direction="left"
-              onClick={() => this.caroselClickHandler("left")}
-            >
-              <FaAngleLeft />
-            </sc.Arrow>
+            {gallery.length > 1 && (
+              <sc.Arrow
+                direction="left"
+                onClick={() => this.caroselClickHandler("left")}
+              >
+                <FaAngleLeft />
+              </sc.Arrow>
+            )}
             <sc.Image src={gallery[this.state.currenctImage]} alt={brand} />
-            <sc.Arrow
-              direction="right"
-              onClick={() => this.caroselClickHandler("right")}
-            >
-              <FaAngleRight />
-            </sc.Arrow>
+            {gallery.length > 1 && (
+              <sc.Arrow
+                direction="right"
+                onClick={() => this.caroselClickHandler("right")}
+              >
+                <FaAngleRight />
+              </sc.Arrow>
+            )}
           </sc.ImageContainer>
         </sc.RightContainer>
       </sc.CartContainer>

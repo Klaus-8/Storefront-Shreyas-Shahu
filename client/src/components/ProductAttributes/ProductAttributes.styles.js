@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const AttributesContainer = styled.div``;
 
@@ -14,12 +14,21 @@ export const Attributes = styled.div`
   }
 `;
 
+const typeMiniCartAttributeName = css`
+  font-weight: 500;
+  font-size: 15px;
+
+  margin-top: 1rem;
+`;
+
 export const AttributeName = styled.span`
   font-family: var(--font-roboto-condensed);
   font-weight: 700;
   font-size: 18px;
 
   margin-top: 1.7rem;
+
+  ${({ type }) => type === "miniCart" && typeMiniCartAttributeName}
 `;
 
 export const AttributeOuterContainer = styled.div`
@@ -34,6 +43,22 @@ export const AttributeOuterContainer = styled.div`
   }
 `;
 
+const typeMiniCartSwatch = css`
+  width: 2rem;
+  height: 1.4rem;
+  margin: 0.25rem 0.375rem 0.25rem 0;
+`;
+
+const typeSingleProductSwatch = css`
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const activeSwatch = css`
+  opacity: 0.2;
+`;
+
 export const AttributeSwatchContainer = styled.div`
   width: 3.9375rem;
   height: 2.8125rem;
@@ -43,25 +68,27 @@ export const AttributeSwatchContainer = styled.div`
   background-color: ${({ colorHex }) => colorHex};
   transition: all 0.3s ease;
 
-  ${({ type }) =>
-    type === "miniCart" &&
-    `
-    width: 2rem;
-    height: 1.4rem;
-    margin: 0.25rem 0.375rem 0.25rem 0;
-  `};
+  ${({ type }) => type === "miniCart" && typeMiniCartSwatch};
 
-  ${({ type }) =>
-    type === "singleProduct" &&
-    `&:hover {
+  ${({ type }) => type === "singleProduct" && typeSingleProductSwatch}
+
+  ${({ active }) => active && activeSwatch}
+`;
+
+const typeMiniCartInnerContainer = css`
+  margin: 0.25rem 0.375rem 0.25rem 0;
+  padding: 0.4rem 0.7rem;
+`;
+
+const typeSingleProductInnerContainer = css`
+  &:hover {
     cursor: pointer;
-  }`}
+  }
+`;
 
-  ${({ active }) =>
-    active &&
-    `
-    opacity: 0.2;
-  `}
+const activeInnerContainer = css`
+  color: var(--white-color);
+  background-color: var(--black-color);
 `;
 
 export const AttributeInnerContainer = styled.div`
@@ -71,25 +98,11 @@ export const AttributeInnerContainer = styled.div`
   border: 1px solid var(--black-color);
   transition: all 0.3s ease;
 
-  ${({ type }) =>
-    type === "miniCart" &&
-    `
-    margin: 0.25rem 0.375rem 0.25rem 0;
-    padding: 0.4rem 0.7rem;
-  `};
+  ${({ type }) => type === "miniCart" && typeMiniCartInnerContainer};
 
-  ${({ type }) =>
-    type === "singleProduct" &&
-    `&:hover {
-    cursor: pointer;
-  }`}
+  ${({ type }) => type === "singleProduct" && typeSingleProductInnerContainer}
 
-  ${({ active }) =>
-    active &&
-    `
-    color: var(--white-color);
-    background-color: var(--black-color);
-  `}
+  ${({ active }) => active && activeInnerContainer}
 `;
 
 export const AttributeValue = styled.span``;

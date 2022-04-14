@@ -36,6 +36,14 @@ const GET_PRODUCTS = gql`
         id
         name
         gallery
+        attributes {
+          name
+          type
+          items {
+            displayValue
+            value
+          }
+        }
         inStock
         prices {
           currency {

@@ -52,12 +52,22 @@ const selectedAttributesHandler = (selectedAttributes) => {
   return action;
 };
 
+const checkOut = () => {
+  const action = {
+    type: "CHECK_OUT",
+    payload: [],
+  };
+
+  return action;
+};
+
 const productActions = {
   AddToCart,
   RemoveFromCart,
   MiniCartToggler,
   CurrencySwitcher,
   selectedAttributesHandler,
+  checkOut,
 };
 
 export default productActions;

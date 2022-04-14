@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const MiniCartOuterContainer = styled.div`
   width: 25rem;
@@ -73,15 +73,30 @@ export const MiniCartButtonContainer = styled.div`
   justify-content: space-between;
 `;
 
+const typeView = css`
+  border: 1px solid var(--black-color);
+  background: var(--white-color);
+`;
+
+const typeNotView = css`
+  color: var(--white-color);
+  background: var(--green-color);
+`;
+
+const typeCheck = css`
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+`;
+
+const typeNotCheck = css`
+  color: var(--white-color);
+  background: var(--green-color);
+  border: 1px solid var(--green-color);
+`;
+
 export const MiniCartButton = styled.div`
   padding: 1rem 3rem;
 
-  ${({ type }) =>
-    type === "view"
-      ? `border: 1px solid var(--black-color); 
-        background: var(--white-color);`
-      : `color: var(--white-color);
-      background: var(--green-color);`};
+  ${({ type }) => (type === "view" ? typeView : typeNotView)};
 
   font-weight: 600;
   font-size: 0.875rem;
@@ -89,12 +104,7 @@ export const MiniCartButton = styled.div`
   transition: all 0.3s ease;
 
   &:hover {
-    ${({ type }) =>
-      type === "check"
-        ? `box-shadow: 0 0 25px rgba(0, 0, 0, 0.2)`
-        : `color: var(--white-color);
-      background: var(--green-color);
-      border: 1px solid var(--green-color)`};
+    ${({ type }) => (type === "check" ? typeCheck : typeNotCheck)};
 
     cursor: pointer;
   }

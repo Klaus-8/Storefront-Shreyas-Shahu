@@ -1,10 +1,11 @@
 import styled from "styled-components";
 
 export const OuterContainer = styled.div`
-  padding: 4.5rem 6rem;
-  transition: all 0.2s ease;
+  width: 100%;
+  min-height: 100vh;
 
-  ${({ miniCart }) => miniCart && `background: rgba(57, 55, 72, 0.22);`};
+  padding: 4.5rem 6rem 1rem;
+  transition: all 0.2s ease;
 
   @media screen and (max-width: 480px) {
     padding: 2rem 0;
@@ -15,7 +16,7 @@ export const OuterContainer = styled.div`
   }
 
   @media screen and (min-width: 1920px) {
-    padding: 10rem 6rem;
+    padding: 6rem;
   }
 `;
 
@@ -37,14 +38,14 @@ export const ImageContainer = styled.div`
 `;
 
 export const SecondaryImageOuterContainer = styled.div`
-  overflow-y: scroll;
-
   @media screen and (max-width: 480px) {
     margin: 1rem 0;
+    overflow: scroll;
   }
 
   @media screen and (min-width: 481px) and (max-width: 1024px) {
     width: 10rem;
+    overflow: scroll;
   }
 `;
 
@@ -63,8 +64,8 @@ export const SecondaryImageInnerContainer = styled.div`
 export const SecondaryImage = styled.img`
   width: 100%;
   height: 100%;
-  margin-bottom: 2rem;
-  object-fit: cover;
+  margin-bottom: 0.6rem;
+  object-fit: contain;
 
   &:hover {
     cursor: pointer;
@@ -96,7 +97,7 @@ export const PrimaryImage = styled.img`
   width: 100%;
   height: 100%;
 
-  object-fit: cover;
+  object-fit: contain;
 `;
 
 export const InfoContainer = styled.div`
@@ -187,24 +188,8 @@ export const Desc = styled.div`
   }
 `;
 
-export const ShortDesc = styled.span`
-  font-family: var(--font-roboto);
-  font-weight: 400;
-  font-size: 1rem;
-`;
-
 export const FullDesc = styled.span`
   font-family: var(--font-roboto);
   font-weight: 400;
   font-size: 1rem;
-`;
-
-export const ReadMore = styled.span`
-  font-weight: 200;
-  font-size: 0.9rem;
-  color: blue;
-
-  &:hover {
-    cursor: pointer;
-  }
 `;

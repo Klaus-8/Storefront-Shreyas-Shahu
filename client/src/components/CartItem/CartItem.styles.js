@@ -64,7 +64,7 @@ export const RightContainer = styled.div`
 export const QuantityContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 
   margin-right: 0.75rem;
@@ -92,7 +92,9 @@ export const Plus = styled.div`
   }
 `;
 
-export const Quantity = styled.span``;
+export const Quantity = styled.span`
+  margin: 2rem 0;
+`;
 
 export const Minus = styled.div`
   width: 1.8rem;
@@ -124,7 +126,7 @@ export const ImageContainer = styled.div`
 export const Image = styled.img`
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 `;
 
 export const Arrow = styled.div`
@@ -142,5 +144,5 @@ export const Arrow = styled.div`
   cursor: pointer;
   position: absolute;
   ${({ direction }) => direction}: 0;
-  z-index: 2;
+  z-index: 1;
 `;

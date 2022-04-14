@@ -9,6 +9,7 @@ import { GET_PRODUCT } from "../../Queries/queries";
 import * as sc from "./MiniCart.styles";
 import { MiniCartItem } from "../../components";
 import images from "../../Assets/images";
+import allActions from "../../State/Actions";
 
 export class MiniCart extends Component {
   constructor(props) {
@@ -16,8 +17,13 @@ export class MiniCart extends Component {
     this.state = {};
   }
 
+  checkOutHandler = () => {
+    this.props.checkOut();
+    window.alert("Woohoo! Order Successfully Placed!!");
+  };
+
   render() {
-    const { miniCartClose, cartProducts, activeCurrency } = this.props;
+    const { miniCartClose, activeCurrency, cartProducts } = this.props;
 
     const uniqueProducts = _.uniqWith(cartProducts, _.isEqual);
     const uniqueIds = uniqueProducts.map((product) => product.id);
@@ -87,7 +93,7 @@ export class MiniCart extends Component {
             <sc.MiniCartButton
               onClick={() =>
                 cartProducts.length > 0
-                  ? window.alert("Woohoo! Order Successfully Placed!!")
+                  ? this.checkOutHandler()
                   : window.alert("Oops! Your cart is empty!")
               }
               type="check"
@@ -102,12 +108,18 @@ export class MiniCart extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const { cartProducts, activeCurrency } = state.productReducer;
+  const { activeCurrency, cartProducts } = state.productReducer;
 
   return {
-    cartProducts: cartProducts,
     activeCurrency: activeCurrency,
+    cartProducts: cartProducts,
   };
 };
 
-export default connect(mapStateToProps)(MiniCart);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    checkOut: () => dispatch(allActions.productActions.checkOut()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MiniCart);

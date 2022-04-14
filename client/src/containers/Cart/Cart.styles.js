@@ -1,17 +1,18 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-export const OuterContainer = styled.div`
-  transition: all 0.2s ease;
+const emptyCartOuterContainer = css`
+  width: 100%;
+  height: 100vh;
 
-  ${({ emptyCart }) =>
-    emptyCart
-      ? `
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
-  `
-      : `
+
+  padding-top: 2rem;
+`;
+
+const cartOuterContainer = css`
   padding: 5rem 15rem 0 6.25rem;
 
   @media screen and (max-width: 768px) {
@@ -25,9 +26,14 @@ export const OuterContainer = styled.div`
   @media screen and (min-width: 769px) and (max-width: 1024px) {
     padding: 5rem 5rem 0 6.25rem;
   }
-  `}
+`;
 
-  ${({ miniCart }) => miniCart && `background: rgba(57, 55, 72, 0.22);`};
+export const OuterContainer = styled.div`
+  transition: all 0.2s ease;
+  min-height: 100vh;
+
+  ${({ emptyCart }) =>
+    emptyCart ? emptyCartOuterContainer : cartOuterContainer}
 `;
 
 export const Container = styled.div`
@@ -58,8 +64,6 @@ export const CartItemContainer = styled.div``;
 export const EmptyCartContainer = styled.div`
   width: 30rem;
   height: 30rem;
-
-  ${({ miniCart }) => miniCart && `opacity: 0;`};
 
   @media screen and (max-width: 480px) {
     margin-top: 5rem;
